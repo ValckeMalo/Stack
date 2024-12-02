@@ -955,9 +955,9 @@ MonoBehaviour:
   directionCube: 1
   indexSpawner: 0
   score: 0
-  CubeSpeed: 3
-  MaxSpeed: 20
-  IncrementSpeed: 5
+  CubeSpeed: 5
+  MaxSpeed: 10
+  IncrementSpeed: 0.75
   ScoreToUpSpeed: 15
   gradient:
     serializedVersion: 2
@@ -1024,7 +1024,7 @@ AudioSource:
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
