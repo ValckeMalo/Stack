@@ -995,6 +995,7 @@ MonoBehaviour:
   source: {fileID: 922340143}
   perfect: 0
   perfectNeed: 5
+  platformMat: {fileID: 2100000, guid: 7ae4a17008dd3a24d85ccf65c66cf081, type: 2}
 --- !u!4 &922340142
 Transform:
   m_ObjectHideFlags: 0

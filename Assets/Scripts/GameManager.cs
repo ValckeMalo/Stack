@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public AudioSource source;
     public int perfect;
     public int perfectNeed = 5;
+    public Material platformMat;
     public Color CurrentColor { get => gradient.Evaluate(score / 10f); }
 
     public IEnumerator SpawnNextCube()
