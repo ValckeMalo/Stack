@@ -86,6 +86,14 @@ public class MovingCube : MonoBehaviour
 
     private void SplitCubeOnZ(float delta)
     {
+        if (Mathf.Abs(delta) <= GameManager.Instance.LastCube.transform.localScale.z * 0.05f)
+        {
+            transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
+            GameManager.Instance.LastCube = transform;
+            StartCoroutine(GameManager.Instance.SpawnNextCube());
+            return;
+        }
+
         float Zsize = GameManager.Instance.LastCube.transform.localScale.z - Mathf.Abs(delta);
         float sizeFallingPart = GameManager.Instance.LastCube.transform.localScale.z - Zsize;
 
@@ -114,6 +122,14 @@ public class MovingCube : MonoBehaviour
 
     private void SplitCubeOnX(float delta)
     {
+        if (Mathf.Abs(delta) <= GameManager.Instance.LastCube.transform.localScale.x * 0.05f)
+        {
+            transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
+            GameManager.Instance.LastCube = transform;
+            StartCoroutine(GameManager.Instance.SpawnNextCube());
+            return;
+        }
+
         float Xsize = GameManager.Instance.LastCube.transform.localScale.x - Mathf.Abs(delta);
         float sizeFallingPart = GameManager.Instance.LastCube.transform.localScale.x - Xsize;
 
