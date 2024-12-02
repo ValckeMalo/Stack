@@ -29,7 +29,7 @@ public class CubeSpawner : MonoBehaviour
         cube.transform.localScale = GameManager.Instance.LastCube.transform.localScale;
         if (GameManager.Instance.perfect >= GameManager.Instance.perfectNeed)
         {
-            cube.transform.localScale *= 1.10f;
+            cube.transform.localScale = new Vector3(cube.transform.localScale.x * 1.10f, cube.transform.localScale.y, cube.transform.localScale.z * 1.10f);
         }
     }
 
