@@ -91,6 +91,7 @@ public class MovingCube : MonoBehaviour
             transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
             GameManager.Instance.LastCube = transform;
             GameManager.Instance.PlayGood();
+            GetComponent<ParticleSystem>().Play();
             StartCoroutine(GameManager.Instance.SpawnNextCube());
             return;
         }
@@ -130,6 +131,7 @@ public class MovingCube : MonoBehaviour
             transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
             GameManager.Instance.PlayGood();
             GameManager.Instance.LastCube = transform;
+            GetComponent<ParticleSystem>().Play();
             StartCoroutine(GameManager.Instance.SpawnNextCube());
             return;
         }
