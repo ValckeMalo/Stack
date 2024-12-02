@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     }
 
     public Camera cameraStack;
-    private Transform startCameraTransform;
+    public Vector3 startCameraPos;
     public Transform LastCube;
     public MovingCube currentCube;
     public CubeSpawner[] spawner;
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public float IncrementSpeed = 5f;
     private float BaseSpeed;
     public float ScoreToUpSpeed = 15;
+    public Gradient gradient;
+    public Color CurrentColor { get => gradient.Evaluate(score / 10f); }
 
     public IEnumerator SpawnNextCube()
     {
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
                 HUDGame.SetActive(true);
                 spawner[indexSpawner].SpawnCube();
                 indexSpawner = (indexSpawner + 1) % spawner.Length;
-                startCameraTransform = cameraStack.transform;
+                startCameraPos = cameraStack.transform.position;
                 BaseSpeed = CubeSpeed;
             }
             else
@@ -79,17 +81,21 @@ public class GameManager : MonoBehaviour
 
         HUDMenu.SetActive(true);
         HUDGame.SetActive(false);
-        cameraStack.transform.position = startCameraTransform.position;
+        cameraStack.transform.position = startCameraPos;
         currentCube = null;
         LastCube = tower.transform.GetChild(0);
         indexSpawner = 0;
-        score = 0;
         UpdateHUDScore();
+        if (PlayerPrefs.GetInt("Score") >= score)
+        {
+            PlayerPrefs.SetInt("Score", score);
+        }
+        score = 0;
     }
 
     public void UpdateHUDScore()
     {
-        CubeSpeed = Mathf.Min(BaseSpeed + (IncrementSpeed * (score % ScoreToUpSpeed)), MaxSpeed);
+        CubeSpeed = Mathf.Min(BaseSpeed + (IncrementSpeed * ((int)(score / ScoreToUpSpeed))), MaxSpeed);
         HUDGame.transform.GetComponentInChildren<TextMeshProUGUI>().text = score.ToString();
     }
 }

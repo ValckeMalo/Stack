@@ -5,9 +5,10 @@ public class MovingCube : MonoBehaviour
     public float timeDeath = 1.5f;
     private bool moving = true;
 
-    public void Awake()
+    public void OnEnable()
     {
         GameManager.Instance.currentCube = this;
+        GetComponent<MeshRenderer>().material.color = GameManager.Instance.CurrentColor;
     }
 
     public void Update()
@@ -79,6 +80,7 @@ public class MovingCube : MonoBehaviour
         fallingCube.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, sizeFallingPart);
         fallingCube.transform.position = new Vector3(transform.position.x, transform.position.y, fallingPosZ);
         fallingCube.AddComponent<Rigidbody>();
+        fallingCube.GetComponent<MeshRenderer>().material.color = GameManager.Instance.CurrentColor;
         Destroy(fallingCube, timeDeath);
     }
 
@@ -106,6 +108,7 @@ public class MovingCube : MonoBehaviour
         fallingCube.transform.localScale = new Vector3(sizeFallingPart, transform.localScale.y, transform.localScale.z);
         fallingCube.transform.position = new Vector3(fallingPosX, transform.position.y, transform.position.z);
         fallingCube.AddComponent<Rigidbody>();
+        fallingCube.GetComponent<MeshRenderer>().material.color = GameManager.Instance.CurrentColor;
         Destroy(fallingCube, timeDeath);
     }
 }
