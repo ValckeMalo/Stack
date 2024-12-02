@@ -988,6 +988,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  bestscore: {fileID: 188994951}
 --- !u!4 &922340142
 Transform:
   m_ObjectHideFlags: 0

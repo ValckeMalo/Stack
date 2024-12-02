@@ -5,10 +5,22 @@ public class MovingCube : MonoBehaviour
     public float timeDeath = 1.5f;
     private bool moving = true;
 
+    private const float maxZ = 14.5f;
+    private const float maxX = 8f;
+    private const float minX = -8f;
+    private const float minZ = -1.5f;
+
+    private int direction = 1;
+
     public void OnEnable()
     {
         GameManager.Instance.currentCube = this;
         GetComponent<MeshRenderer>().material.color = GameManager.Instance.CurrentColor;
+    }
+
+    public static bool IsGreaterOrEqual(Vector3 a, Vector3 b)
+    {
+        return a.x >= b.x && a.y >= b.y && a.z >= b.z;
     }
 
     public void Update()
@@ -17,11 +29,27 @@ public class MovingCube : MonoBehaviour
 
         if (GameManager.Instance.directionCube == GameManager.DirectionCube.Z)
         {
-            transform.position += transform.forward * Time.deltaTime * GameManager.Instance.CubeSpeed;
+            transform.position += transform.forward * Time.deltaTime * GameManager.Instance.CubeSpeed * direction;
+            if (transform.position.z >= maxZ && direction == 1)
+            {
+                direction = -1;
+            }
+            else if (transform.position.z <= minZ && direction == -1)
+            {
+                direction = 1;
+            }
         }
         else
         {
-            transform.position += transform.right * Time.deltaTime * GameManager.Instance.CubeSpeed;
+            transform.position += transform.right * Time.deltaTime * GameManager.Instance.CubeSpeed * direction;
+            if (transform.position.x >= maxX && direction == 1)
+            {
+                direction = -1;
+            }
+            else if (transform.position.x <= minX && direction == -1)
+            {
+                direction = 1;
+            }
         }
     }
 
