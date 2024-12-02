@@ -84,9 +84,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Loose()
+    public IEnumerator Loose()
     {
+        //dezoom
         int towerCount = tower.transform.childCount - 1; //let the start
+        cameraStack.orthographicSize = 5 + towerCount;
+
+        yield return new WaitForSeconds(1.5f);
+
+        towerCount = tower.transform.childCount - 1;
         for (int i = 0; i < towerCount; i++)
         {
             Destroy(tower.transform.GetChild(towerCount - i).gameObject);
@@ -96,6 +102,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Score", score);
         }
+
+
         score = 0;
         bestscore.text = $"Best Score : {PlayerPrefs.GetInt("Score")}";
         HUDMenu.SetActive(true);
@@ -104,6 +112,7 @@ public class GameManager : MonoBehaviour
         currentCube = null;
         LastCube = tower.transform.GetChild(0);
         indexSpawner = 0;
+        cameraStack.orthographicSize = 5;
         UpdateHUDScore();
     }
 

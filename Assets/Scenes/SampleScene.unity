@@ -955,10 +955,10 @@ MonoBehaviour:
   directionCube: 1
   indexSpawner: 0
   score: 0
-  CubeSpeed: 5
-  MaxSpeed: 10
-  IncrementSpeed: 0.75
-  ScoreToUpSpeed: 15
+  CubeSpeed: 8
+  MaxSpeed: 25
+  IncrementSpeed: 2
+  ScoreToUpSpeed: 10
   gradient:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.9764979, a: 1}

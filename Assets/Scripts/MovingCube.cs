@@ -62,7 +62,7 @@ public class MovingCube : MonoBehaviour
             float delta = transform.position.z - GameManager.Instance.LastCube.position.z;
             if (Mathf.Abs(delta) >= GameManager.Instance.LastCube.transform.localScale.z)
             {
-                GameManager.Instance.Loose();
+                StartCoroutine(GameManager.Instance.Loose());
                 return;
             }
 
@@ -74,7 +74,7 @@ public class MovingCube : MonoBehaviour
             float delta = transform.position.x - GameManager.Instance.LastCube.position.x;
             if (Mathf.Abs(delta) >= GameManager.Instance.LastCube.transform.localScale.x)
             {
-                GameManager.Instance.Loose();
+                StartCoroutine(GameManager.Instance.Loose());
                 return;
             }
 
