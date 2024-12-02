@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private float BaseSpeed;
     public float ScoreToUpSpeed = 15;
     public Gradient gradient;
+    public TextMeshProUGUI bestscore;
     public Color CurrentColor { get => gradient.Evaluate(score / 10f); }
 
     public IEnumerator SpawnNextCube()
@@ -49,6 +50,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         spawner[indexSpawner].SpawnCube();
         indexSpawner = (indexSpawner + 1) % spawner.Length;
+    }
+
+    public void OnEnable()
+    {
+        bestscore.text = $"Best Score : {PlayerPrefs.GetInt("Score")}";
     }
 
     public void Update()
@@ -79,6 +85,12 @@ public class GameManager : MonoBehaviour
             Destroy(tower.transform.GetChild(towerCount - i).gameObject);
         }
 
+        if (PlayerPrefs.GetInt("Score") <= score)
+        {
+            PlayerPrefs.SetInt("Score", score);
+        }
+        score = 0;
+        bestscore.text = $"Best Score : {PlayerPrefs.GetInt("Score")}";
         HUDMenu.SetActive(true);
         HUDGame.SetActive(false);
         cameraStack.transform.position = startCameraPos;
@@ -86,11 +98,6 @@ public class GameManager : MonoBehaviour
         LastCube = tower.transform.GetChild(0);
         indexSpawner = 0;
         UpdateHUDScore();
-        if (PlayerPrefs.GetInt("Score") >= score)
-        {
-            PlayerPrefs.SetInt("Score", score);
-        }
-        score = 0;
     }
 
     public void UpdateHUDScore()
