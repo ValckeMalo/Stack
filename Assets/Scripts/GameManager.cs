@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     public float ScoreToUpSpeed = 15;
     public Gradient gradient;
     public TextMeshProUGUI bestscore;
+    public AudioClip bad;
+    public AudioClip good;
+    public AudioSource source;
     public Color CurrentColor { get => gradient.Evaluate(score / 10f); }
 
     public IEnumerator SpawnNextCube()
@@ -104,5 +107,16 @@ public class GameManager : MonoBehaviour
     {
         CubeSpeed = Mathf.Min(BaseSpeed + (IncrementSpeed * ((int)(score / ScoreToUpSpeed))), MaxSpeed);
         HUDGame.transform.GetComponentInChildren<TextMeshProUGUI>().text = score.ToString();
+    }
+
+    public void PlayBad()
+    {
+        source.clip = bad;
+        source.Play();
+    }
+    public void PlayGood()
+    {
+        source.clip = good;
+        source.Play();
     }
 }

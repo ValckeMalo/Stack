@@ -90,9 +90,11 @@ public class MovingCube : MonoBehaviour
         {
             transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
             GameManager.Instance.LastCube = transform;
+            GameManager.Instance.PlayGood();
             StartCoroutine(GameManager.Instance.SpawnNextCube());
             return;
         }
+        GameManager.Instance.PlayBad();
 
         float Zsize = GameManager.Instance.LastCube.transform.localScale.z - Mathf.Abs(delta);
         float sizeFallingPart = GameManager.Instance.LastCube.transform.localScale.z - Zsize;
@@ -125,11 +127,13 @@ public class MovingCube : MonoBehaviour
         if (Mathf.Abs(delta) <= GameManager.Instance.LastCube.transform.localScale.x * 0.05f)
         {
             transform.position = GameManager.Instance.LastCube.transform.position + new Vector3(0f, GameManager.Instance.LastCube.transform.localScale.y, 0f);
+            GameManager.Instance.PlayGood();
             GameManager.Instance.LastCube = transform;
             StartCoroutine(GameManager.Instance.SpawnNextCube());
             return;
         }
 
+        GameManager.Instance.PlayBad();
         float Xsize = GameManager.Instance.LastCube.transform.localScale.x - Mathf.Abs(delta);
         float sizeFallingPart = GameManager.Instance.LastCube.transform.localScale.x - Xsize;
 
