@@ -27,6 +27,10 @@ public class CubeSpawner : MonoBehaviour
         }
         GameObject cube = GameObject.Instantiate(cubePrefab, cubePos, Quaternion.identity, GameObject.Find("Tower").transform);
         cube.transform.localScale = GameManager.Instance.LastCube.transform.localScale;
+        if (GameManager.Instance.perfect >= GameManager.Instance.perfectNeed)
+        {
+            cube.transform.localScale *= 1.10f;
+        }
     }
 
     private void OnDrawGizmos()

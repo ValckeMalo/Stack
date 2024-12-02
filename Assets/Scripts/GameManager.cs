@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     public AudioClip bad;
     public AudioClip good;
     public AudioSource source;
+    public int perfect;
+    public int perfectNeed = 5;
     public Color CurrentColor { get => gradient.Evaluate(score / 10f); }
 
     public IEnumerator SpawnNextCube()
@@ -111,12 +114,15 @@ public class GameManager : MonoBehaviour
 
     public void PlayBad()
     {
+        perfect = 0;
         source.clip = bad;
         source.Play();
     }
     public void PlayGood()
     {
+        source.pitch = 1f + ((perfect / 5f) * 3f);
         source.clip = good;
+        perfect++;
         source.Play();
     }
 }
